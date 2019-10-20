@@ -290,7 +290,6 @@ object MarkUtils {
 
     /**
      * DES: 合并图标和文本
-     * AUTHOR: XGY
      * TIME: 2019/4/8 14:42
      * 此方法只能给氛围图标用，其他地方用了不负责的
      *

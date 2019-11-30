@@ -13,7 +13,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.lsj.demo.adapter.CommonAdapter
 import com.lsj.demo.adapter.CommonViewHolder
+import com.lsj.demo.customview.CustomViewGroupActivity
 import com.lsj.demo.customview.ViewLocationInfoActivity
+import com.lsj.demo.encrypt.EncryptTestActivity
 import com.lsj.demo.mark.MarkTestActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -58,7 +60,9 @@ class MainActivity : AppCompatActivity() {
     private fun getFuncDataSet(): List<JumpBo>? {
         return arrayListOf(
             JumpBo("View位置参数演示", clz = ViewLocationInfoActivity::class.java),
-            JumpBo("商品打标演示", clz = MarkTestActivity::class.java)
+            JumpBo("商品打标演示", clz = MarkTestActivity::class.java),
+            JumpBo("自定义ViewGroup演示", clz = CustomViewGroupActivity::class.java),
+            JumpBo("加解密耗时测试", clz = EncryptTestActivity::class.java)
         )
     }
 }

@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".customview.ViewLocationInfoActivity"/>
         <activity android:name=".mark.MarkTestActivity"/>
+        <activity android:name=".customview.CustomViewGroupActivity"/>
+        <activity android:name=".encrypt.EncryptTestActivity"/>
     </application>
 
 </manifest>

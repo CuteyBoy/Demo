@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
@@ -68,7 +67,7 @@ class MarkTestActivity: FragmentActivity(){
         for (index in 0..80) {
             var tempAtmosphereUrl: String? = null
             val markList = ArrayList<MarkBo>()
-            for (j in 0..Random.nextInt(0, 4)) {
+            for (j in 0..Random.nextInt(0, 8)) {
                 if(j == 0) {
                     tempAtmosphereUrl = getRandomMarkUrl(atmosphereUrl)
                 }
@@ -138,8 +137,12 @@ object MarkUtils {
     private var mAtmosphereDrawable: Drawable? = null
 
     fun setItemMark(markContainer: LinearLayout?, titleView: TextView?, itemBo: ItemBo, isDouble: Boolean) {
-        val markList = itemBo.markList
+        var markList = itemBo.markList
         var markSize = markList?.size ?: 0
+        if(markSize > 4) {
+            markList = markList?.subList(0, 4)
+            markSize = 4
+        }
         var isAtmosphere = false
         var markIndex = -1
         if(markSize > 0) {

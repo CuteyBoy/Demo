@@ -3,11 +3,11 @@ package com.lsj.demo.encrypt
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 import rx.Observable
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 import org.json.JSONObject
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 /**
@@ -48,9 +48,16 @@ object RetrofitNetUtils {
  */
 interface ServiceAPI {
 
-    @GET("/shortUrl/createShortUrl.json")
-    fun getShortUrl(@Query("sourceUrl") sourceUrl: String,
-                    @Query("bizType") bizType: String): Observable<ShortUrl>
+    @GET("encrypt/getEncryptDataCase1")
+    @Headers("ticket:ticket%7C14896_c9c6e0d63d178ebd01b1aa0978df6288v")
+    fun getEncryptDataCase1(@Query("sourceUrl") sourceUrl: String,
+                    @Query("ticket") ticket: String): Observable<String>
+
+    @GET("encrypt/getEncryptDataCase2")
+    fun getEncryptDataCase2(@Query("content") content: String): Observable<String>
+
+    @GET("encrypt/getEncryptDataCase3")
+    fun getEncryptDataCase3(@Query("content") content: String): Observable<String>
 }
 
 

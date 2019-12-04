@@ -29,6 +29,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.lsj.demo.R
 import com.lsj.demo.adapter.CommonAdapter
 import com.lsj.demo.adapter.CommonViewHolder
+import com.lsj.demo.customview.OverflowView
 import com.lsj.demo.drawables.ShapeBuilder
 import com.lsj.demo.utils.DpUtils
 import com.lsj.demo.utils.ViewModifyUtils
@@ -58,8 +59,8 @@ class MarkTestActivity: FragmentActivity(){
         val markNameList = arrayListOf(
             "特卖",
             "自营",
-            "云集超市",
-            "云集国际",
+            "云集超市满99",
+            "云集国际云云满99云集国满99集国超",
             "特卖.满99减10"
         )
         val atmosphereUrl = "http://image.yunjiweidian.com/admin_stresstest/ae2c122d929f165b2142a75c752d94f6.png"
@@ -79,7 +80,10 @@ class MarkTestActivity: FragmentActivity(){
                 markList.add(MarkBo(tempAtmosphereUrl, markName))
                 tempAtmosphereUrl = null
             }
-            itemData.add(ItemBo("名字$index", markList))
+            val itemBo = ItemBo("名字$index", markList)
+            itemBo.overflow = "月销1000".plus(index).plus("件")
+            itemBo.content = itemBo.overflow.plus("---").plus(index).plus("---").plus(getRandomMark(markList, markNameList))
+            itemData.add(itemBo)
         }
         mMarkAdapter.setDataSet(itemData)
     }
@@ -114,15 +118,22 @@ class MarkTestActivity: FragmentActivity(){
         override fun onBindDataForView(holder: CommonViewHolder, currentData: ItemBo, position: Int) {
             val mNameTv = holder.findViewById<TextView>(R.id.name_tv)
             mNameTv?.text = currentData.name ?: ""
+            val textText = holder.findViewById<OverflowView>(R.id.overflow_tv)
+            textText?.setText(currentData.overflow, currentData.content)
             MarkUtils.setItemMark(holder.findViewById(R.id.mark_container),
                 mNameTv, currentData, true)
+            holder.itemView.setOnClickListener {
+                text_tv.setText(currentData.overflow, currentData.content)
+            }
         }
     }
 }
 
 data class ItemBo(
     var name: String? = null,
-    var markList: List<MarkBo>? = null
+    var markList: List<MarkBo>? = null,
+    var overflow: String? = null,
+    var content: String? = null
 )
 
 data class MarkBo(
